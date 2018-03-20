@@ -3,8 +3,9 @@
 <%@page import="org.svnadmin.entity.*"%>
 <%@page import="org.svnadmin.Constants"%>
 <%@include file="header.jsp"%>
+<div style="width:100%;text-align:center">
 <span style="color:green;font-weight:bold;"><%=I18N.getLbl(request,"pj.title","项目管理") %></span><br><br>
-
+</div>
 <%
 boolean hasAdminRight = (Boolean)request.getAttribute("hasAdminRight");
 boolean hasManagerRight = (Boolean)request.getAttribute("hasManagerRight");
@@ -37,7 +38,8 @@ function checkForm(f){
 </script>
 <form name="pj" action="<%=ctx%>/pj" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table class="thinborder">
+	<table class="thinborder" style="margin-left:10%;width:80%">
+	
 		<tr>
 			<td class="lbl"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td>
@@ -69,7 +71,7 @@ function checkForm(f){
 		</tr>
 		<tr>
 			<td class="lbl"><%=I18N.getLbl(request,"pj.des","描述") %></td>
-			<td colspan="5"><input type="text" name="des" value="<%=entity.getDes()==null?"":entity.getDes()%>" style="width:100%;"></td>
+			<td colspan="5"><textarea type="text" name="des" value="<%=entity.getDes()==null?"":entity.getDes()%>" style="width:100%;height:80px;"></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="6" align="center">
@@ -81,20 +83,18 @@ function checkForm(f){
 <%}%>
 
 
-<table class="sortable thinborder">
+<table class="sortable thinborder" style="margin-left:10%;width:80%;">
 
 	<thead>
-		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
-		<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>
-		<td><%=I18N.getLbl(request,"pj.path","路径") %></td>
-		<td><%=I18N.getLbl(request,"pj.url","URL") %></td>
-		<td><%=I18N.getLbl(request,"pj.type","类型") %></td>
-		<td><%=I18N.getLbl(request,"pj.des","描述") %></td>
-		<td><%=I18N.getLbl(request,"pj.op.setuser","设置用户") %></td>
-		<td><%=I18N.getLbl(request,"pj.op.setgr","设置用户组") %></td>
-		<td><%=I18N.getLbl(request,"pj.op.setauth","设置权限") %></td>
-		<td><%=I18N.getLbl(request,"pj.op.delete","删除") %></td>
+		<td style="width:5%"><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
+		<td style="width:10%"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+		<td style="width:10%"><%=I18N.getLbl(request,"pj.path","路径") %></td>
+		<td style="width:40%"><%=I18N.getLbl(request,"pj.url","URL") %></td>
+		<td style="width:5%"><%=I18N.getLbl(request,"pj.type","类型") %></td> 
+		<td style="width:10%"><%=I18N.getLbl(request,"pj.des","描述") %></td>
+		<td style="width:20%"><%=I18N.getLbl(request,"operting","操作") %></td>
 	</thead>
+	<tbody>
 	<%
 	java.util.List<Pj> list = (java.util.List<Pj>)request.getAttribute("list");
 
@@ -103,43 +103,36 @@ function checkForm(f){
 		  Pj pj = list.get(i);
 		%>
 		<tr>
-		<td><%=(i+1) %></td>
-		<td>
+		<td align="center"><%=(i+1) %></td>
+		<td align="center" style="word-break:break-all">
 			<%if(hasAdminRight || pj.isManager()){%><a href="<%=ctx%>/pj?act=get&pj=<%=pj.getPj()%>"><%=pj.getPj() %></a><%}else{%><%=pj.getPj() %><%}%>
 		</td>
-		<td title="<%=pj.getPj() %>">
+		<td align="center" title="<%=pj.getPj() %>" style="word-break:break-all;white-space:normal;">
 			<%if(hasAdminRight || pj.isManager()){%><%=pj.getPath() %><%}else{%>&nbsp;<%}%>
 		</td>
-		<td title="<%=pj.getPj() %>">
+		<td align="center" title="<%=pj.getPj() %>" style="word-break:break-all;white-space:normal;">
 			<%if(hasAdminRight || pj.isManager()){%>
 				<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=pj.getUrl() %></a>
 			<%}else{%>
 				<%=pj.getUrl() %>
 			<%}%>
 		</td>
-		<td title="<%=pj.getPj() %>"><%=pj.getType()%></td>
-		<td title="<%=pj.getPj() %>"><%=pj.getDes() %></td>
-		<td title="<%=pj.getPj() %>">
-		<%if(Constants.SVN.equals(pj.getType()) || Constants.HTTP.equals(pj.getType())){%><a href="<%=ctx%>/pjusr?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setuser","设置用户") %></a><%}else{%>&nbsp;<%}%>
-		</td>
+		<td align="center" title="<%=pj.getPj() %>" style="word-break:break-all ;white-space:normal;"><%=pj.getType()%></td>
+		<td align="center" title="<%=pj.getPj() %>" style="word-break:break-all;white-space:normal;"><%=pj.getDes() %></td>
 		
-		<%if(hasAdminRight || pj.isManager()){%>
-		<td title="<%=pj.getPj() %>">
+	
+		<td align="center" title="<%=pj.getPj() %>" >
+			<%if(Constants.SVN.equals(pj.getType()) || Constants.HTTP.equals(pj.getType())){%><a href="<%=ctx%>/pjusr?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setuser","设置用户") %></a><%}else{%>&nbsp;<%}%>
+			<%if(hasAdminRight || pj.isManager()){%>
 			<a href="<%=ctx%>/pjgr?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setgr","设置用户组") %></a>
-		</td>
-		<td title="<%=pj.getPj() %>">
-		<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setauth","设置权限") %></a>
+			<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setauth","设置权限") %></a>
+			<%} %>
+			<%if(hasAdminRight ){%>
+			<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pj.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pj?pj=<%=pj.getPj()%>')}"><%=I18N.getLbl(request,"pj.op.delete","删除") %></a>
+			<%} %>
 		</td>
 		
-		
-		<td title="<%=pj.getPj() %>">
-		<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pj.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pj?pj=<%=pj.getPj()%>')}"><%=I18N.getLbl(request,"pj.op.delete","删除") %></a>
-		</td>
-		<%}else{%>
-		<td title="<%=pj.getPj() %>">&nbsp;</td>
-		<td title="<%=pj.getPj() %>">&nbsp;</td>
-		<td title="<%=pj.getPj() %>">&nbsp;</td>
-		<%} %>
 	</tr>
 	<%}}%>
+	</tbody>
 </table>

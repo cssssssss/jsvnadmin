@@ -2,8 +2,9 @@
 <%@page import="org.svnadmin.Constants"%>
 <%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
+<div style="width:100%;text-align:center">
 <span style="color:green;font-weight:bold;"><a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <%=I18N.getLbl(request,"pjauth.title","权限管理") %></span><br><br>
-
+</div>
 <script type="text/javascript" src="<%=ctx%>/resources/treeview/treeview.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=ctx%>/resources/treeview/treeview.css"></link>
 <script type="text/javascript">

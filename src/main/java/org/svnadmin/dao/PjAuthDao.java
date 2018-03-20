@@ -103,14 +103,14 @@ public class PjAuthDao extends Dao {
 	 * @return 用户的权限
 	 */
 	public List<PjAuth> getByUsr(String usr) {
-		String sql = "select b.pj,p.des,b.usr,b.res,b.rw from usr a";
+		String sql = "select b.pj,p.des,b.usr,b.res,b.rw,p.url from usr a";
 		sql+=" join pj_usr_auth b on (a.usr = b.usr)";
 		sql+=" join pj p on (b.pj=p.pj)";
 		sql+=" where a.usr=?";
 
 		sql+=" union all";
 
-		sql+=" select c.pj,p.des,a.usr,c.res,c.rw from usr a";
+		sql+=" select c.pj,p.des,a.usr,c.res,c.rw,p.url from usr a";
 		sql+=" join pj_gr_usr b on (a.usr = b.usr)";
 		sql+=" join pj_gr_auth c on (b.pj = c.pj and b.gr = c.gr)";
 		sql+=" join pj p on (b.pj=p.pj)";
@@ -138,6 +138,7 @@ public class PjAuthDao extends Dao {
 				result.setDes(rs.getString("des"));
 				result.setUsr(rs.getString("usr"));
 				result.setRes(rs.getString("res"));
+				result.setUrl(rs.getString("url"));
 				String rw = rs.getString("rw");
 				if (StringUtils.isBlank(rw)) {
 					rw = "";

@@ -2,7 +2,9 @@
 <%@page import="org.svnadmin.Constants"%>
 <%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
+<div style="width:100%;text-align:center">
 <span style="color:green;font-weight:bold;"><a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <%=I18N.getLbl(request,"pjgr.title","用户组管理") %></span><br><br>
+</div>
 <%
 org.svnadmin.entity.PjGr entity = (org.svnadmin.entity.PjGr)request.getAttribute("entity");
 if(entity==null)entity=new org.svnadmin.entity.PjGr();
@@ -24,7 +26,7 @@ function checkForm(f){
 </script>
 <form name="pjgr" action="<%=ctx%>/pjgr" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table class="thinborder">
+	<table class="thinborder"  style="margin-left:10%;width:80%">
 		<tr>
 			<td class="lbl"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
@@ -39,7 +41,7 @@ function checkForm(f){
 	</table>
 </form>
 
-<table class="sortable thinborder">
+<table class="sortable thinborder"  style="margin-left:10%;width:80%">
 
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
@@ -57,19 +59,19 @@ function checkForm(f){
 		  org.svnadmin.entity.PjGr pjGr = list.get(i);
 		%>
 		<tr>
-		<td><%=(i+1) %></td>
-		<td>
+		<td  align="center"><%=(i+1) %></td>
+		<td  align="center">
 			<%=pjGr.getPj() %>
 		</td>
 		
-		<td>
+		<td  align="center">
 			<%if((pjGr.getPj()+"_"+Constants.GROUP_MANAGER).equals(pjGr.getGr()) || Constants.GROUP_MANAGER.equals(pjGr.getGr())){%><%=pjGr.getGr() %><%}else{%>
 			<a href="<%=ctx%>/pjgr?act=get&pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>"><%=pjGr.getGr() %></a>
 			<%}%>
 		</td>
-		<td><%=pjGr.getDes() %></td>
-		<td><a href="<%=ctx%>/pjgrusr?pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>"><%=I18N.getLbl(request,"pjgr.op.setuser","设置用户") %></a></td>
-		<td>
+		<td  align="center"><%=pjGr.getDes() %></td>
+		<td  align="center"><a href="<%=ctx%>/pjgrusr?pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>"><%=I18N.getLbl(request,"pjgr.op.setuser","设置用户") %></a></td>
+		<td  align="center">
 			<%if((pjGr.getPj()+"_"+Constants.GROUP_MANAGER).equals(pjGr.getGr()) || Constants.GROUP_MANAGER.equals(pjGr.getGr())){%>&nbsp;<%}else{%>
 			<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjgr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjgr?pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>')}"><%=I18N.getLbl(request,"pjgr.op.delete","删除") %></a>
 			<%}%>

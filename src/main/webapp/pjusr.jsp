@@ -2,9 +2,11 @@
 <%@page import="java.util.List"%>
 <%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
+<div style="width:100%;text-align:center">
 <span style="color:green;font-weight:bold;"><a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <a href="<%=ctx%>/pjusr?pj=<%=request.getParameter("pj")%>"><%=I18N.getLbl(request,"pjusr.title","项目用户管理") %></a></span>
 <em style="color:blue;"><%=I18N.getLbl(request,"pjusr.info","(注意:这里设置的用户密码只对这个项目有效)") %></em>
 <br><br>
+</div>
 <%
 boolean hasManagerRight = (Boolean)request.getAttribute("hasManagerRight");
 %>
@@ -38,7 +40,7 @@ function checkForm(f){
 
 <form name="pjusr" action="<%=ctx%>/pjusr" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table class="thinborder">
+	<table class="thinborder"  style="margin-left:10%;width:80%">
 		<tr>
 			<td class="lbl"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
@@ -78,7 +80,7 @@ function checkForm(f){
 </form>
 
 <%if(hasManagerRight){ %>
-<table class="sortable thinborder">
+<table class="sortable thinborder"  style="margin-left:10%;width:80%">
 
 	<thead>
 		<td>NO.</td>
@@ -95,19 +97,19 @@ function checkForm(f){
 		  org.svnadmin.entity.PjUsr pjUsr = list.get(i);
 		%>
 		<tr>
-		<td><%=(i+1) %></td>
-		<td>
+		<td  align="center"><%=(i+1) %></td>
+		<td  align="center">
 			<%=pjUsr.getPj() %>
 		</td>
 		
-		<td>
+		<td  align="center">
 			<a href="<%=ctx%>/pjusr?act=get&pj=<%=pjUsr.getPj()%>&usr=<%=pjUsr.getUsr()%>"><%=pjUsr.getUsr() %></a>
 		</td>
-		<td>
+		<td  align="center">
 			<a href="<%=ctx%>/pjusr?act=get&pj=<%=pjUsr.getPj()%>&usr=<%=pjUsr.getUsr()%>"><%=pjUsr.getName()==null?"":pjUsr.getName() %></a>
 		</td>
-		<td><%=pjUsr.getPsw() %></td>
-		<td>
+		<td  align="center"><%="******" %></td>
+		<td  align="center">
 		<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjusr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjusr?&pj=<%=pjUsr.getPj()%>&usr=<%=pjUsr.getUsr()%>')}"><%=I18N.getLbl(request,"pjusr.op.delete","删除") %></a>
 		</td>
 	</tr>

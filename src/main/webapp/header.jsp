@@ -36,8 +36,7 @@ return;
 <table width="100%">
 	<tr>
 		<td align="center" style="font-size:20;font-weight:bold;">
-			<%=I18N.getLbl(request,"main.title","SVN ADMIN")%>
-			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="http://code.google.com/p/jsvnadmin/"><sub style="font-size: 10px;font-weight:normal;">V <%=SpringUtils.getVersion()%></sub></a>
+			<%=I18N.getLbl(request,"main.title","SVN MANAGER")%>
 		</td>
 	</tr>
 	<tr>
@@ -58,5 +57,5 @@ return;
 String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);
 if(errorMsg != null){
 %>
-	<div style="color:red;"><%=I18N.getLbl(request,"sys.error","错误") %> <%=errorMsg%></div>
+	<div style="color:red;width:100%;text-align:center;margin-bottom:10px;"><%=I18N.getLbl(request,"sys.error","错误") %> <%=errorMsg%></div>
 <%}%>

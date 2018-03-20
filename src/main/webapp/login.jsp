@@ -34,40 +34,94 @@ try{
 </head>
 <body>
 <%-- 选择语言 --%>
-<div style="float:right">
+<div style="float:right;height:10%" >
 	<%@include file="chagelang.jsp"%>
 </div>
-<%-- error --%>
-<%
-String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);
-if(errorMsg != null){
-%>
-<div style="color:red;"><%=I18N.getLbl(request,"sys.error","错误") %> <%=errorMsg%></div>
-<%}%>
-<%-- set administrator tip --%>
-<%
-int usrCount = usrService.getCount();
-if(usrCount == 0){
-%>
-<div style="color:blue"><%=I18N.getLbl(request,"login.info.setadmin","欢迎使用SVN ADMIN,第一次使用请设置管理员帐号和密码.") %></div>
-<%}%>
+
 
 <%-- login form --%>
-	<form name="login" action="<%=ctx%>/login" method="post">
-		<table>
-		
-			<tr>
-				<td align="right"><%=I18N.getLbl(request,"usr.usr","帐号") %></td>
-				<td><input type="text" id="usr" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>"></td>
-			</tr>
-			<tr>
-				<td align="right"><%=I18N.getLbl(request,"usr.psw","密码") %></td>
-				<td><input type="password" id="psw" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="<%=I18N.getLbl(request,"login.btn.login","登录") %>"></td>
-			</tr>
-		</table>
-	</form>
+	
+	    <table style="width:100%;height:90%;" cellspacing="0" cellpadding="0" border="0" class="login_bg">
+	     <tr style="height:20%"><td align="center" >
+            <h1><%=I18N.getLbl(request,"main.title","SVN MANAGER")%></h1>
+        </td>
+        </tr>
+        <%-- error --%>
+		<%
+		String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);
+		if(errorMsg != null){
+		%>
+		 <tr><td align="center" >
+		<font style="color:red;"><%=I18N.getLbl(request,"sys.error","错误") %> <%=errorMsg%></font>
+		</td>
+        </tr>
+		<%}%>
+		<%-- set administrator tip --%> 
+		<%
+		int usrCount = usrService.getCount();
+		if(usrCount == 0){
+		%>
+		 <tr><td align="center" >
+		<font style="color:blue;"><%=I18N.getLbl(request,"login.info.setadmin","欢迎使用SVN ADMIN,第一次使用请设置管理员帐号和密码.") %></font>
+			</td>
+        </tr>
+		<%}%>
+        <tr style="height:80%">
+            <td valign="top" align="center" >
+                <table width="489" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td valign="bottom" style="height:247px" class="login_pic01">
+                            <table width="360" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td style="width:10px;height:51px;">&nbsp;</td>
+                                    <td style="width:390px"></td>
+                                </tr>
+                            </table>
+                            <table cellspacing="0" cellpadding="0" border="0" align="center">
+                             <form name="login" action="<%=ctx%>/login" method="post">
+                                <tr style="width:93px; height:50px;" >
+                                    <td style="width:93px; height:50px;" align="right"><%=I18N.getLbl(request,"usr.usr","帐号") %> ：</td>
+                                    <td style="width:227px;">
+                                       <input type="text" id="usr" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>">
+                                    </td>
+                                </tr>
+                                <tr style="width:93px; height:50px;" >
+                                    <td style="height:50px;" align="right"><%=I18N.getLbl(request,"usr.psw","密码") %>：</td>
+                                    <td>
+                                      <input type="password" id="psw" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>">
+                                    </td>
+                                </tr>
+                                
+                                <tr style="width:93px; height:50px;" >
+                                    <td align="center" colspan="3">
+                                        <table cellspacing="0" cellpadding="0" border="0" class="fm_table_left">
+                                            <tr>
+                                                <td >
+                                                   <input type="submit" value="<%=I18N.getLbl(request,"login.btn.login","登录") %>" style="height:25px;width:100px;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                               </form>
+                            </table>
+                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:120px;"></td>
+                                        <td style="height:22px;color: red;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="height:137px;" class="login_pic02">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        
+    </table>
 </body>
 </html>

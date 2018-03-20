@@ -107,12 +107,14 @@ String ctx = request.getContextPath();
 <form name="pjauth" action="<%=ctx%>/pjauth" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
 	<input type="hidden" name="pj" value="<%=request.getParameter("pj")%>">
-	<table class="thinborder">
-		<tr>
+	<table class="thinborder" style="width:100%;height:60%">
+		<tr style="height:10%">
 			<td class="lbl"><%=I18N.getLbl(request,"pjauth.res","资源") %></td>
-			<td colspan="3">
-				<input type="text" name="res" value="<%=entity.getRes()==null?"":entity.getRes()%>" style="width:400px;"><span style="color:red;">*</span>
-				<select onchange="this.form.res.value=this.value">
+			<td colspan="2">
+				<input type="text" name="res" value="<%=entity.getRes()==null?"":entity.getRes()%>" style="width:98%;"><span style="color:red;">*</span>
+			</td>
+			 <td>
+				<select onchange="this.form.res.value=this.value" style="width:60%;">
 				<option value=""><%=I18N.getLbl(request,"pjauth.res.select","选择资源") %></option>
 				 <%
 				 java.util.List<String> pjreslist = (java.util.List<String>)request.getAttribute("pjreslist");
@@ -125,13 +127,13 @@ String ctx = request.getContextPath();
 				 </select>
 			</td>
 		</tr>
-		<tr>
+		<tr  style="height:70%">
 			<td class="lbl"><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
 			<td valign="top">
-				<table>
+				<table style="height:100%;width:100%;">
 					<tr>
-						<td style="border:0px;">
-							<select id="select3" multiple="multiple" style="height: 150px;width: 180px;">
+						<td style="border:0px;width:45%">
+							<select id="select3" multiple="multiple" style="height: 100%;width:100%;">
 								<%
 								java.util.List<org.svnadmin.entity.PjGr> pjgrlist = (java.util.List<org.svnadmin.entity.PjGr>)request.getAttribute("pjgrlist");
 								if(pjgrlist!=null){	
@@ -142,26 +144,26 @@ String ctx = request.getContextPath();
 								<%}}%>
 							</select>
 						</td>
-						<td style="border:0px;">
-							<input id="group_add" type="button" style="width:30px;" value=">"><br>
-							<input id="group_add_all" type="button" style="width:30px;" value=">>"><br><br>
-							<input id="group_del" type="button" style="width:30px;" value="<"><br>
-							<input id="group_del_all" type="button" style="width:30px;" value="<<"><br><br>
+						<td style="border:0px;width:5%">
+							<input id="group_add" type="button" style="margin-left:10%;width:80%;" value=">"><br>
+							<input id="group_add_all" type="button" style="margin-left:10%;width:80%;" value=">>"><br><br>
+							<input id="group_del" type="button" style="margin-left:10%;width:80%;" value="<"><br>
+							<input id="group_del_all" type="button" style="margin-left:10%;width:80%;" value="<<"><br><br>
 						</td>
-						<td style="border:0px;">
-							<select id="select4" name="grs" multiple="multiple" style="height: 150px;width: 180px;">
+						<td style="border:0px;width:45%">
+							<select id="select4" name="grs" multiple="multiple" style="height: 100%;width:100%;">
 							</select>
-						</td>
+						</td> 
 					</tr>
 				</table>
 			</td>
 			
 			<td class="lbl"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td valign="top">
-				<table>
+				<table style="height:100%;width:100%;">
 					<tr>
-						<td style="border:0px;">
-							<select id="select1" multiple="multiple" style="height: 150px;width: 180px;">
+						<td style="border:0px;width:45%">
+							<select id="select1" multiple="multiple" style="height: 100%;width:100%;">
 									<%
 									java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
 									if(usrlist!=null){	
@@ -171,22 +173,22 @@ String ctx = request.getContextPath();
 									<option value="<%=usr.getUsr()%>"><%=usr.getName()==null?usr.getUsr():usr.getName()+"("+usr.getUsr()+")"%></option>
 									<%}}%>
 							</select>
-						</td>
-						<td style="border:0px;">
+						</td> 
+						<td style="border:0px;width:5%">
 							<input id="user_add" type="button" style="width:30px;" value=">"><br>
 							<input id="user_add_all" type="button" style="width:30px;" value=">>"><br><br>
 							<input id="user_del" type="button" style="width:30px;" value="<"><br>
 							<input id="user_del_all" type="button" style="width:30px;" value="<<"><br><br>
 						</td>
-						<td style="border:0px;">
-							<select id="select2" name="usrs" multiple="multiple" style="height: 150px;width: 180px;">
+						<td style="border:0px;width:45%">
+							<select id="select2" name="usrs" multiple="multiple" style="height: 100%;width:100%;">
 							</select>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
-		<tr>
+		<tr style="height:10%">
 			<td class="lbl"><%=I18N.getLbl(request,"pjauth.rw","权限") %></td>
 			<td colspan="3">
 			<select name="rw">
@@ -196,7 +198,7 @@ String ctx = request.getContextPath();
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr style="height:10%">
 			<td colspan="4" align="center">
 				<input type="submit" value="<%=I18N.getLbl(request,"pjauth.btn.submit","保存") %>">
 			</td>
@@ -204,7 +206,7 @@ String ctx = request.getContextPath();
 	</table>
 </form>
 
-<table class="sortable thinborder">
+<table class="sortable thinborder" style="width:100%">
 
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>

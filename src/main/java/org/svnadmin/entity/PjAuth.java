@@ -41,6 +41,11 @@ public class PjAuth implements Serializable {
 	 * 描述
 	 */
 	private String des;
+	
+	/**
+	 * URL
+	 */
+	private String url;
 
 	/**
 	 * @return 资源
@@ -147,6 +152,14 @@ public class PjAuth implements Serializable {
 	 */
 	public void setDes(String des) {
 		this.des = des;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
